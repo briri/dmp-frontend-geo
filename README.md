@@ -1,30 +1,84 @@
-# React + TypeScript + Vite
+# Geo DMP Dashboard Coding Exercise
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+Certainly! Here's the complete README content in Markdown format. You can copy this directly into your README.md file:
 
-Currently, two official plugins are available:
+````markdown
+# Project Title
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react/README.md) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+Brief description of your project.
 
-## Expanding the ESLint configuration
+## Getting Started
 
-If you are developing a production application, we recommend updating the configuration to enable type aware lint rules:
+These instructions will get you a copy of the project up and running on your local machine for development and testing purposes.
 
-- Configure the top-level `parserOptions` property like this:
+### Prerequisites
 
-```js
-export default {
-  // other rules...
-  parserOptions: {
-    ecmaVersion: 'latest',
-    sourceType: 'module',
-    project: ['./tsconfig.json', './tsconfig.node.json'],
-    tsconfigRootDir: __dirname,
-  },
-}
+What things you need to install the software and how to install them.
+
+```bash
+node --version
+npm --version
+```
+````
+
+Ensure that you have Node.js and npm installed on your system. If not, you can download and install them from [Node.js website](https://nodejs.org/).
+
+### Installing
+
+A step-by-step series of examples that tell you how to get a development environment running.
+
+First, clone the repository:
+
+```bash
+git clone [repository URL]
+cd [repository name]
 ```
 
-- Replace `plugin:@typescript-eslint/recommended` to `plugin:@typescript-eslint/recommended-type-checked` or `plugin:@typescript-eslint/strict-type-checked`
-- Optionally add `plugin:@typescript-eslint/stylistic-type-checked`
-- Install [eslint-plugin-react](https://github.com/jsx-eslint/eslint-plugin-react) and add `plugin:react/recommended` & `plugin:react/jsx-runtime` to the `extends` list
+Then install the dependencies:
+
+```bash
+npm install
+```
+
+### Running the Application
+
+To run the application in development mode, execute:
+
+```bash
+npm run dev
+```
+
+This will start the Vite server. By default, the application will be available at `http://localhost:3000` in your browser.
+
+### Building for Production
+
+To build the application for production, use:
+
+```bash
+npm run build
+```
+
+This command will generate a `dist` directory with the compiled assets.
+
+### Running Production Build Locally
+
+If you want to test the production build on your local machine, you can use:
+
+```bash
+npm run preview
+```
+
+This will serve the content of the `dist` directory on a local web server, typically at `http://localhost:5000`.
+
+## Contributing
+
+Instructions for how to contribute to this project.
+
+## License
+
+This project is licensed under the [LICENSE NAME] License - see the LICENSE file for details
+
+```
+
+Please replace `[repository URL]`, `[repository name]`, and `[LICENSE NAME]` with the actual details of your project. This template can be adapted and expanded as needed for your specific project requirements.
+```

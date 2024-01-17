@@ -1,34 +1,62 @@
-import { useState } from 'react'
-import reactLogo from './assets/react.svg'
-import viteLogo from '/vite.svg'
-import './App.css'
+import { FC, useCallback, useEffect, useState } from 'react'
+import Grid from '@mui/material/Grid'
+import { fetchDmpRecordsList } from './api/dmpRecordsList'
+import type { DataManagementPlan } from './api/types'
+import DmpComponent from './DmpComponent'
+import DmpIdSelect from './DmpIdSelect'
 
-function App() {
-  const [count, setCount] = useState(0)
+type AppProps = {
+  fetchRecordsQuery?: (dmpId: string) => Promise<DataManagementPlan[]>
+}
+
+const App: FC<AppProps> = ({ fetchRecordsQuery = fetchDmpRecordsList }) => {
+  const [dmpId, setDmpId] = useState<string | undefined>(undefined)
+  const [dmpRecords, setDmpRecords] = useState<DataManagementPlan[] | undefined>(undefined)
+  const [error, setError] = useState<string | undefined>(undefined)
+
+  const fetchRecords = useCallback(async () => {
+    try {
+      console.log({ dmpId })
+      if (!dmpId) return setDmpRecords(undefined)
+      const records = await fetchRecordsQuery(dmpId || '')
+      console.log({ records })
+      setDmpRecords(records)
+    } catch (error) {
+      const e = error as Error
+      console.error(e)
+      setError(e.message)
+    }
+  }, [fetchRecordsQuery, dmpId])
+
+  useEffect(() => {
+    void fetchRecords()
+  }, [fetchRecords])
+
+  const renderRecords = () => {
+    if (!dmpRecords) return <div>Loading...</div>
+    return (
+      <>
+        {dmpRecords.map((dmpRecord: DataManagementPlan) => (
+          <DmpComponent key={String(dmpRecord.dmp.dmp_id)} record={dmpRecord} />
+        ))}
+        {error && (
+          <Grid item xs={12}>
+            <div className='error-message'>{error}</div>
+          </Grid>
+        )}
+      </>
+    )
+  }
 
   return (
-    <>
-      <div>
-        <a href="https://vitejs.dev" target="_blank">
-          <img src={viteLogo} className="logo" alt="Vite logo" />
-        </a>
-        <a href="https://react.dev" target="_blank">
-          <img src={reactLogo} className="logo react" alt="React logo" />
-        </a>
-      </div>
-      <h1>Vite + React</h1>
-      <div className="card">
-        <button onClick={() => setCount((count) => count + 1)}>
-          count is {count}
-        </button>
-        <p>
-          Edit <code>src/App.tsx</code> and save to test HMR
-        </p>
-      </div>
-      <p className="read-the-docs">
-        Click on the Vite and React logos to learn more
-      </p>
-    </>
+    <Grid container spacing={2} justifyContent='center' style={{ marginTop: '20px' }}>
+      <Grid item xs={12} md={8} lg={6}>
+        <DmpIdSelect onChange={setDmpId} dmpId={dmpId || ''} />
+      </Grid>
+      <Grid item xs={12} md={8} lg={6}>
+        {renderRecords()}
+      </Grid>
+    </Grid>
   )
 }
 
