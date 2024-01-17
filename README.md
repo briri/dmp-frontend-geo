@@ -13,8 +13,6 @@ node --version
 npm --version
 ```
 
-````
-
 Ensure that you have Node.js and npm installed on your system. If not, you can download and install them from [Node.js website](https://nodejs.org/).
 
 ### Installing
@@ -71,9 +69,3 @@ Instructions for how to contribute to this project.
 ## License
 
 This project is licensed under the [LICENSE NAME] License - see the LICENSE file for details
-
-```
-
-Please replace `[repository URL]`, `[repository name]`, and `[LICENSE NAME]` with the actual details of your project. This template can be adapted and expanded as needed for your specific project requirements.
-```
-````
