@@ -1,12 +1,5 @@
 # Geo DMP Dashboard Coding Exercise
 
-Certainly! Here's the complete README content in Markdown format. You can copy this directly into your README.md file:
-
-````markdown
-# Project Title
-
-Brief description of your project.
-
 ## Getting Started
 
 These instructions will get you a copy of the project up and running on your local machine for development and testing purposes.
@@ -19,6 +12,7 @@ What things you need to install the software and how to install them.
 node --version
 npm --version
 ```
+
 ````
 
 Ensure that you have Node.js and npm installed on your system. If not, you can download and install them from [Node.js website](https://nodejs.org/).
@@ -82,3 +76,4 @@ This project is licensed under the [LICENSE NAME] License - see the LICENSE file
 
 Please replace `[repository URL]`, `[repository name]`, and `[LICENSE NAME]` with the actual details of your project. This template can be adapted and expanded as needed for your specific project requirements.
 ```
+````
