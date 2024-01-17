@@ -2,6 +2,8 @@
 
 ## Developer Notes
 
+- The sort function doesn't provide any value given the IDs given as the dmp lists for each id is only one
+- Sort does a client side sort, but there are usually server side sorting implementations that were not found
 - Used Material UI as a quick fix for styling, but would normally more carefully consider styling options
 - Tests setup as an example of how tests would be setup, does not provide good test coverage
 - types are based on usage, not on api spec
