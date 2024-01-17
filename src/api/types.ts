@@ -69,27 +69,28 @@ interface Project {
   title: string
 }
 
+type dmpType = {
+  contact: Contact
+  contributor: Contributor[]
+  created?: string
+  dataset?: Dataset[]
+  description: string
+  dmp_id: DmpId
+  dmphub_versions?: DmphubVersion[]
+  dmproadmap_external_system_identifier?: string
+  dmproadmap_featured?: string
+  dmproadmap_links?: DmproadmapLinks
+  dmproadmap_privacy?: string
+  dmproadmap_related_identifiers?: RelatedIdentifier[]
+  dmproadmap_template?: DmproadmapTemplate
+  ethical_issues_description?: string
+  ethical_issues_exist?: string
+  ethical_issues_report?: string
+  language?: string
+  modified: string
+  project: Project[]
+  title: string
+}
 export interface DataManagementPlan {
-  dmp: {
-    contact: Contact
-    contributor: Contributor[]
-    created: string
-    dataset: Dataset[]
-    description: string
-    dmp_id: DmpId
-    dmphub_versions: DmphubVersion[]
-    dmproadmap_external_system_identifier: string
-    dmproadmap_featured: string
-    dmproadmap_links: DmproadmapLinks
-    dmproadmap_privacy: string
-    dmproadmap_related_identifiers: RelatedIdentifier[]
-    dmproadmap_template: DmproadmapTemplate
-    ethical_issues_description: string
-    ethical_issues_exist: string
-    ethical_issues_report: string
-    language: string
-    modified: string
-    project: Project[]
-    title: string
-  }
+  dmp: dmpType
 }
