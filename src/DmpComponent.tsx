@@ -4,11 +4,19 @@ import TextField from '@mui/material/TextField'
 import TextareaAutosize from '@mui/material/TextareaAutosize'
 import { Box, Button, Card, CardContent, Typography, Link, InputLabel } from '@mui/material'
 
-type DmpComponentProps = {
-  record: DataManagementPlan
+type saveItemProps = {
+  title: string
+  contactEmail: string
+  opportunityId: string
+  description: string
 }
 
-const DmpComponent: FC<DmpComponentProps> = ({ record }) => {
+type DmpComponentProps = {
+  record: DataManagementPlan
+  saveItem: (item: saveItemProps) => Promise<void>
+}
+
+const DmpComponent: FC<DmpComponentProps> = ({ record, saveItem }) => {
   const { dmp } = record
 
   const [title, setTitle] = useState(dmp.title)
@@ -24,11 +32,17 @@ const DmpComponent: FC<DmpComponentProps> = ({ record }) => {
   const handleOpportunityIdChange = (event: ChangeEvent<HTMLInputElement>) => setOpportunityId(event.target.value)
   const handleAbstractChange = (event: ChangeEvent<HTMLTextAreaElement>) => setDescription(event.target.value)
 
-  const handleSave = () => {
-    // Implement save logic here
-    console.log('Saving', { title, contactEmail, opportunityId, description })
+  const handleSave = async () => {
+    // Ask the user for confirmation
+    const userConfirmed = window.confirm('Are you sure you want to save these changes?')
 
-    // Example: You might want to send this data to a server or update the state
+    if (userConfirmed) {
+      // If the user clicked 'OK', proceed with the save logic
+      await saveItem({ title, contactEmail, opportunityId, description })
+    } else {
+      // If the user clicked 'Cancel', do nothing
+      console.log('Save cancelled by user')
+    }
   }
 
   useEffect(() => {
