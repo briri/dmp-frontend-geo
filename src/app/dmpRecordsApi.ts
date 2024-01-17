@@ -15,7 +15,7 @@ export type APIResponseType = {
 
 // API throws a CORS error, and so I'm using a browser extension to bypass it
 const dmpAxios = axios.create({
-  baseURL: 'https://api.dmphub.uc3stg.cdlib.net/dmps/',
+  baseURL: 'https://api.dmphub.uc3dev.cdlib.net/dmps/',
   withCredentials: false,
   headers: {
     'Content-Type': 'application/json',
