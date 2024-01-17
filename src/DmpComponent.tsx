@@ -121,10 +121,10 @@ const DmpComponent: FC<DmpComponentProps> = ({ record, saveItem }) => {
           onChange={handleOpportunityIdChange}
           margin='normal'
         />
+        <Button variant='contained' color='primary' onClick={handleSave}>
+          Save Changes
+        </Button>
       </CardContent>
-      <Button variant='contained' color='primary' onClick={handleSave}>
-        Save Changes
-      </Button>
     </Card>
   )
 }
