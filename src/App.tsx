@@ -1,16 +1,17 @@
 import { FC, useCallback, useEffect, useState } from 'react'
 import Grid from '@mui/material/Grid'
-import { fetchDmpRecordsList } from './api/dmpRecordsList'
-import type { DataManagementPlan } from './api/types'
-import DmpComponent from './DmpComponent'
-import DmpIdSelect from './DmpIdSelect'
+import { fetchDmpRecordsList, saveDmpRecord } from './app/dmpRecordsApi'
+import type { DataManagementPlan } from './app/apiTypes'
+import DmpComponent, { SaveItemProps } from './app/DmpComponent'
+import DmpIdSelect from './app/DmpIdSelect'
 
 type AppProps = {
-  fetchRecordsQuery?: (dmpId: string) => Promise<DataManagementPlan[]>
+  fetchRecordsQuery: (dmpId: string) => Promise<DataManagementPlan[]>
+  updateRecordQuery: (dmpId: string, payload: SaveItemProps) => Promise<void>
 }
 
 // Pass the functions with the fetchRecordsQuery prop for testing
-const App: FC<AppProps> = ({ fetchRecordsQuery = fetchDmpRecordsList }) => {
+const App: FC<AppProps> = ({ fetchRecordsQuery = fetchDmpRecordsList, updateRecordQuery = saveDmpRecord }) => {
   const [loading, setLoading] = useState<boolean>(false)
   const [dmpId, setDmpId] = useState<string | undefined>(undefined)
   const [dmpRecords, setDmpRecords] = useState<DataManagementPlan[] | undefined>(undefined)
@@ -19,10 +20,8 @@ const App: FC<AppProps> = ({ fetchRecordsQuery = fetchDmpRecordsList }) => {
   const fetchRecords = useCallback(async () => {
     try {
       setLoading(true)
-      console.log({ dmpId })
       if (!dmpId) return setDmpRecords(undefined)
-      const records = await fetchRecordsQuery(dmpId || '')
-      console.log({ records })
+      const records = await fetchRecordsQuery(dmpId)
       setDmpRecords(records)
     } catch (error) {
       const e = error as Error
@@ -32,16 +31,6 @@ const App: FC<AppProps> = ({ fetchRecordsQuery = fetchDmpRecordsList }) => {
       setLoading(false)
     }
   }, [fetchRecordsQuery, dmpId])
-
-  const saveItem = async (item: {
-    title: string
-    contactEmail: string
-    opportunityId: string
-    description: string
-  }) => {
-    const { title, contactEmail, opportunityId, description } = item
-    console.info('saveItem', { title, contactEmail, opportunityId, description })
-  }
 
   useEffect(() => {
     void fetchRecords()
@@ -54,7 +43,7 @@ const App: FC<AppProps> = ({ fetchRecordsQuery = fetchDmpRecordsList }) => {
       <>
         {dmpRecords.map((dmpRecord: DataManagementPlan) => {
           if (!dmpRecord || !dmpRecord.dmp) return <div>Invalid DMP Record</div>
-          return <DmpComponent key={String(dmpRecord.dmp.dmp_id)} record={dmpRecord} saveItem={saveItem} />
+          return <DmpComponent key={String(dmpRecord.dmp.dmp_id)} record={dmpRecord} saveItem={updateRecordQuery} />
         })}
         {error && (
           <Grid item xs={12}>

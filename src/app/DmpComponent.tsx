@@ -1,10 +1,10 @@
 import { FC, ChangeEvent, useEffect, useState } from 'react'
-import { DataManagementPlan } from './api/types'
+import { DataManagementPlan } from './apiTypes'
 import TextField from '@mui/material/TextField'
 import TextareaAutosize from '@mui/material/TextareaAutosize'
 import { Box, Button, Card, CardContent, Typography, Link, InputLabel } from '@mui/material'
 
-type saveItemProps = {
+export type SaveItemProps = {
   title: string
   contactEmail: string
   opportunityId: string
@@ -13,7 +13,7 @@ type saveItemProps = {
 
 type DmpComponentProps = {
   record: DataManagementPlan
-  saveItem: (item: saveItemProps) => Promise<void>
+  saveItem: (id: string, payload: SaveItemProps) => Promise<void>
 }
 
 const DmpComponent: FC<DmpComponentProps> = ({ record, saveItem }) => {
@@ -46,13 +46,14 @@ const DmpComponent: FC<DmpComponentProps> = ({ record, saveItem }) => {
 
     if (userConfirmed) {
       // If the user clicked 'OK', proceed with the save logic
-      await saveItem({ title, contactEmail, opportunityId, description })
+      await saveItem(dmp.dmp_id.identifier, { title, contactEmail, opportunityId, description })
     } else {
       // If the user clicked 'Cancel', do nothing
-      console.log('Save cancelled by user')
+      console.info('Save cancelled by user')
     }
   }
 
+  // This is not an ideal way of handling record changes, but it is a quick fix for this example
   useEffect(() => {
     setTitle(record.dmp.title)
     setContactEmail(record.dmp.contact.mbox)

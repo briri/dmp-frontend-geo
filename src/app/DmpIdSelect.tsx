@@ -31,9 +31,6 @@ const DmpIdSelect: FC<DmpIdSelectProps> = ({ onChange, dmpId }) => {
         label='DMP ID'
         onChange={handleChange}
       >
-        <MenuItem value=''>
-          <em>None</em>
-        </MenuItem>
         {dmpIds.map((id) => (
           <MenuItem key={id} value={id}>
             {id}

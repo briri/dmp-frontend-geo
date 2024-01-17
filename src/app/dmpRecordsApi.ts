@@ -1,5 +1,6 @@
 import axios, { AxiosError } from 'axios'
-import { DataManagementPlan } from './types'
+import { DataManagementPlan } from './apiTypes'
+import { SaveItemProps } from './DmpComponent'
 
 export type APIResponseType = {
   status: number
@@ -43,4 +44,9 @@ export const fetchDmpRecordsList = async (dmpId: string): Promise<DataManagement
       throw new Error(`Error: ${e.message}`)
     }
   }
+}
+
+export const saveDmpRecord = async (id: string, payload: SaveItemProps) => {
+  const { title, contactEmail, opportunityId, description } = payload
+  console.info('saveItem', id, { title, contactEmail, opportunityId, description })
 }

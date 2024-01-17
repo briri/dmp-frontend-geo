@@ -69,9 +69,10 @@ interface Project {
   title: string
 }
 
-type dmpType = {
+// TODO create separate types for update and fetched DMPs to match api specs
+export type DmpType = {
   contact: Contact
-  contributor: Contributor[]
+  contributor?: Contributor[]
   created?: string
   dataset?: Dataset[]
   description: string
@@ -91,6 +92,7 @@ type dmpType = {
   project: Project[]
   title: string
 }
+
 export interface DataManagementPlan {
-  dmp: dmpType
+  dmp: DmpType
 }
