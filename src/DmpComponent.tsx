@@ -34,6 +34,13 @@ const DmpComponent: FC<DmpComponentProps> = ({ record, saveItem }) => {
   const handleAbstractChange = (event: ChangeEvent<HTMLTextAreaElement>) => setDescription(event.target.value)
 
   const handleSave = async () => {
+    // Check if required fields are filled
+    // TODO implement a form library like react-hook-form to handle this
+    if (!title.trim() || !contactEmail.trim()) {
+      alert('Please fill in all required fields.')
+      return
+    }
+
     // Ask the user for confirmation
     const userConfirmed = window.confirm('Are you sure you want to save these changes?')
 
