@@ -21,7 +21,8 @@ const DmpComponent: FC<DmpComponentProps> = ({ record, saveItem }) => {
 
   const [title, setTitle] = useState(dmp.title)
   const [contactEmail, setContactEmail] = useState(dmp.contact.mbox)
-  // From the DMP API, it looks like this is the correct field to use for the opportunity ID instead of what is provided
+  // It is not clear how the opportunityId is supposed to be used, so I'm just going to store it as a string
+  // It looks like it should be a dropdown of some sort.
   const [opportunityId, setOpportunityId] = useState(
     dmp.project[0]?.funding[0]?.dmproadmap_funding_opportunity_id?.identifier || ''
   )
@@ -49,7 +50,6 @@ const DmpComponent: FC<DmpComponentProps> = ({ record, saveItem }) => {
     setTitle(record.dmp.title)
     setContactEmail(record.dmp.contact.mbox)
     setOpportunityId(record.dmp.project[0]?.funding[0]?.dmproadmap_funding_opportunity_id?.identifier || '')
-    console.log('desc', record.dmp.description)
     setDescription(record.dmp.description)
   }, [record])
 
