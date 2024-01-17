@@ -7,7 +7,6 @@ type DmpIdSelectProps = {
 }
 
 const SortSelect: FC<DmpIdSelectProps> = ({ onChange, sortInit = 'title' }) => {
-  // Ideally this would be fetched from an API
   const dmpIds = [
     { value: 'title', label: 'Title' },
     { value: 'modified', label: 'Last Updated' },
