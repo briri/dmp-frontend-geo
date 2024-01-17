@@ -80,6 +80,7 @@ describe('App Component', () => {
 
     expect(mockFetchDmpRecordsList).toHaveBeenCalledTimes(1)
     await waitFor(() => {
+      // TODO: Should test 'Test Title', but TextField requires more complex testing patterns
       expect(screen.getByText('2022-01-02')).toBeInTheDocument()
     })
   })

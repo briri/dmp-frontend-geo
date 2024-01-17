@@ -1,5 +1,15 @@
 # Geo DMP Dashboard Coding Exercise
 
+## Developer Notes
+
+- Used Material UI as a quick fix for styling, but would normally more carefully consider styling options
+- Tests setup as an example of how tests would be setup, does not provide good test coverage
+- types are based on usage, not on api spec
+- dmp record form within the scope of the exercise, and not based on expected ux spec
+- In order for better accessibility and ease of development a form library should be implemented (ex: required field handling)
+- Ran into CORS issues that seemed like they should be resolved server-side, so used browser extension as a workaround.
+- Exercise was done while on vacation, so time was limited
+
 ## Getting Started
 
 These instructions will get you a copy of the project up and running on your local machine for development and testing purposes.

@@ -11,7 +11,7 @@ type AppProps = {
   initDmpId?: string
 }
 
-// Pass the functions props for future testing
+// Pass the functions and initial state props for future testing
 const App: FC<AppProps> = ({
   fetchRecordsQuery = fetchDmpRecordsList,
   updateRecordQuery = saveDmpRecord,
@@ -25,6 +25,7 @@ const App: FC<AppProps> = ({
   const fetchRecords = useCallback(async () => {
     try {
       setLoading(true)
+      // For init, and future functionality to clear selected record
       if (!dmpId) return setDmpRecords(undefined)
       const records = await fetchRecordsQuery(dmpId)
       setDmpRecords(records)
@@ -43,7 +44,7 @@ const App: FC<AppProps> = ({
 
   const renderRecords = () => {
     if (loading) return <div>Loading...</div>
-    if (!dmpRecords) return <div>No record chosen</div>
+    if (!dmpRecords) return <div>No DMP ID chosen</div>
     return (
       <>
         {dmpRecords.map((dmpRecord: DataManagementPlan) => {
