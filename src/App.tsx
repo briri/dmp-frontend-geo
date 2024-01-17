@@ -8,12 +8,17 @@ import DmpIdSelect from './app/DmpIdSelect'
 type AppProps = {
   fetchRecordsQuery: (dmpId: string) => Promise<DataManagementPlan[]>
   updateRecordQuery: (dmpId: string, payload: SaveItemProps) => Promise<void>
+  initDmpId?: string
 }
 
-// Pass the functions with the fetchRecordsQuery prop for testing
-const App: FC<AppProps> = ({ fetchRecordsQuery = fetchDmpRecordsList, updateRecordQuery = saveDmpRecord }) => {
+// Pass the functions props for future testing
+const App: FC<AppProps> = ({
+  fetchRecordsQuery = fetchDmpRecordsList,
+  updateRecordQuery = saveDmpRecord,
+  initDmpId,
+}) => {
   const [loading, setLoading] = useState<boolean>(false)
-  const [dmpId, setDmpId] = useState<string | undefined>(undefined)
+  const [dmpId, setDmpId] = useState<string | undefined>(initDmpId)
   const [dmpRecords, setDmpRecords] = useState<DataManagementPlan[] | undefined>(undefined)
   const [error, setError] = useState<string | undefined>(undefined)
 
@@ -45,12 +50,15 @@ const App: FC<AppProps> = ({ fetchRecordsQuery = fetchDmpRecordsList, updateReco
           if (!dmpRecord || !dmpRecord.dmp) return <div>Invalid DMP Record</div>
           return <DmpComponent key={String(dmpRecord.dmp.dmp_id)} record={dmpRecord} saveItem={updateRecordQuery} />
         })}
-        {error && (
-          <Grid item xs={12}>
-            <div className='error-message'>{error}</div>
-          </Grid>
-        )}
       </>
+    )
+  }
+
+  if (error) {
+    return (
+      <Grid item xs={12}>
+        <div className='error-message'>{error}</div>
+      </Grid>
     )
   }
 

@@ -7,6 +7,7 @@ type DmpIdSelectProps = {
 }
 
 const DmpIdSelect: FC<DmpIdSelectProps> = ({ onChange, dmpId }) => {
+  // Ideally this would be fetched from an API
   const dmpIds = [
     '10.48321/D1J31B',
     '10.48321/D1R316',

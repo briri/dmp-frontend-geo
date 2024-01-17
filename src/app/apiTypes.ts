@@ -1,6 +1,6 @@
 interface Contact {
   name: string
-  dmproadmap_affiliation: Record<string, unknown> // Replace with more specific type if known
+  dmproadmap_affiliation?: Record<string, unknown> // Replace with more specific type if known
   mbox: string
   // Add any other properties that are part of the contact object
 }
@@ -53,7 +53,7 @@ interface FunderId {
   identifier: string
 }
 
-interface Funding {
+export interface Funding {
   dmproadmap_funded_affiliations: Affiliation[]
   dmproadmap_funding_opportunity_id?: Identifier
   funder_id: FunderId
@@ -61,7 +61,7 @@ interface Funding {
   name: string
 }
 
-interface Project {
+export interface Project {
   description: string
   end: string // Date in ISO 8601 format
   funding: Funding[] // Array of Funding objects
